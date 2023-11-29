@@ -1,40 +1,26 @@
-const appId = 'dc36a5f3';
-const appKey = 'f80e9e792751861c2b58f13cb2113115';
+const searchBtn = document.querySelector('#searchButton');
+const searchRec = document.querySelector('#recipeSearch');
 
-const searchInput = document.getElementById('recipeSearch');
-const searchButton = document.getElementById('searchButton');
-const recipeList = document.getElementById('recipeList');
-
-searchButton.addEventListener('click', searchRecipes);
-
-function searchRecipes() {
-  const searchTerm = searchInput.value;
-  if (searchTerm) {
-    const apiEndpoint = `https://api.edamam.com/search?q=${searchTerm}&app_id=${appId}&app_key=${appKey}`;
-
-    fetch(apiEndpoint)
-      .then(response => response.json())
-      .then(data => displayRecipes(data.hits))
-      .catch(error => console.error('Error fetching data:', error));
-  }
+// Function to fetch recipe information based on recipe ID
+const apiNinjas = '34OI8Z++sC2o2ypun3q94w==IYDU5y8iMC0HEDlA';
+const apiOptions = {
+  method: 'GET',
+  headers: {'x-api-key' : '34OI8Z++sC2o2ypun3q94w==IYDU5y8iMC0HEDlA'}
 }
 
-function displayRecipes(recipes) {
-  recipeList.innerHTML = '';
-  recipes.forEach((recipe, index) => {
-    const recipeCard = document.createElement('div');
-    recipeCard.classList.add('recipeCard');
-    recipeCard.innerHTML = `
-      <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}">
-      <h3>${recipe.recipe.label}</h3>
-      <p>Brief description of the dish. Lorem ipsum dolor sit amet...</p>
-      <button onclick="viewRecipeDetails(${index})">View Details</button>
-    `;
-    recipeList.appendChild(recipeCard);
-  });
+searchRecipiesAPI = function(){
+  const searchInput = searchRec.value;
+  console.log(searchInput);
+  const apiNinjasRecURL =`https://api.api-ninjas.com/v1/recipe?query=${searchInput}`;
+
+  fetch(apiNinjasRecURL, apiOptions)
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+  })
 }
 
-function viewRecipeDetails(index) {
-  // Add code to handle viewing details for the selected recipe (use the 'index' parameter)
-  console.log(`View details for recipe ${index + 1}`);
-}
+
+searchBtn.addEventListener('click', searchRecipiesAPI)

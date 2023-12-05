@@ -70,10 +70,9 @@ function createRecipeCard(recipe, index) {
 }
 
 // API for Drink Recipes
-const drinkInput = document.querySelector('#drinkSearch');
 const drinkSearchButton = document.querySelector('#searchButtonDrinks');
-const apiNinjas = '34OI8Z++sC2o2ypun3q94w==IYDU5y8iMC0HEDlA';
 const drinkForm = document.querySelector('#drinkForm');
+const apiNinjas = '34OI8Z++sC2o2ypun3q94w==IYDU5y8iMC0HEDlA';
 const apiOptions = {
     method: 'GET',
     headers: { 'x-api-key': '34OI8Z++sC2o2ypun3q94w==IYDU5y8iMC0HEDlA' }
@@ -81,14 +80,17 @@ const apiOptions = {
 
 drinkForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    searchDrinksAPI();
+
+    // Move the drinkInput inside the submit event to get the latest value
+    const drinkInput = document.querySelector('#drinkSearchInput').value;
+
+    console.log(drinkInput);
+    searchDrinksAPI(drinkInput);
 });
 
-
-function searchDrinksAPI() {
-    const drinkSearchInput = drinkInput.value;
-    const apiNinjasRecURL = `https://api.api-ninjas.com/v1/cocktail?name=${drinkSearchInput}`;
-
+function searchDrinksAPI(drinkSearchInput) {
+    const apiNinjasRecURL = `https://api.api-ninjas.com/v1/cocktail?name=${encodeURIComponent(drinkSearchInput)}`;
+    
     fetch(apiNinjasRecURL, apiOptions)
         .then(response => response.json())
         .then(data => {
@@ -100,6 +102,7 @@ function searchDrinksAPI() {
             }
         })
 }
+
 
 // Display Drink Recipes
 const drinkList = document.getElementById('drinkList');

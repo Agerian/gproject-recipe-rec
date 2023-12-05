@@ -1,49 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <title>RecipEase</title>
-</head>
-
-<body>
-  <header>
-    <h1>RecipEase</h1>
-    <p>Your Personalized Recipe Companion</p>
-  </header>
-
-  <section id="search">
-    <h2>Discover Delicious Recipes</h2>
-    <div>
-      <input type="text" id="recipeSearch" placeholder="Search for Recipes">
-      <button id="searchButton">Search</button>
-
-
-      
-    </div>
-  </section>
-
-  <section id="featuredRecipes">
-    <h2>Featured Recipes</h2>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>RecipEase</title>
     
-    <div class="recipeCard">
-      <img src="http://placekitten.com/200/300" alt="Recipe 1">
-      <h3>Recipe Title 1</h3>
-      <p>Brief description of recipe.</p>
-    </div>
+</head>
+<body>
 
-    <div class="recipeCard">
-      <img src="http://placekitten.com/200/300" alt="Recipe 2">
-      <h3>Recipe Title 2</h3>
-      <p>Brief description of recipe.</p>
-    </div>
+    <header>
+        <h1>RecipEase</h1>
+        <p>Your Personalized Recipe Companion</p>
+    </header>
 
+    <!-- Recipe Search Container-->
+    <section id="search">
+        <h2>Discover Delicious Recipes</h2>
+        <form id="recipeForm" onsubmit="searchRecipes(event)">
+            <input type="text" id="recipeSearch" placeholder="Search for Recipes">
+            <button type="submit" id="searchButtonRecipes">RecipEase</button>
+        </form>
+    </section>
+
+    <!-- Drink Search Container -->
+    <section id="drinkSearch">
+        <h2>Search Cocktail Recipes</h2>
+        <form id="drinkForm" onsubmit="searchDrinksAPI(event)">
+            <input type="text" id="drinkSearch" placeholder="Search for Cocktails">
+            <button type="submit" id="searchButtonDrinks">RecipEase</button>
+        </form>
+    </section>
+    
+    <section class="result-cards" style="display:none;">
         <!-- Container for dynamically generated recipe cards -->
-        <div id="recipeList"></div>
-  </section>
-  
- 
-  <script src="./assets/js/script.js"></script>
+        <div class="inner-result-card">
+            <div id="recipeList"></div>
+            <div id="recipeDetails"></div>
+        </div>
+
+        <!-- Container for dynamically generated drink recipes -->
+        <div class="inner-result-card">
+            <div id="drinkList"></div>
+            <div id="drinkDetails"></div>
+        </div>
+    </section>
+
+    <button onclick="openModal()">Open Recipe History</button>
+
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Recipe History</h2>
+            <ul id="recipeHistoryList"></ul>
+        </div>
+    </div>
+
+    <!-- Script tag to external JavaScript file -->
+    <script src="./assets/script.js"></script>
 </body>
 </html>

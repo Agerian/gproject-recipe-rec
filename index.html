@@ -1,49 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <title>RecipEase</title>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="./assets/style.css">
+		<title>RecipEase</title>
+		<link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+		<script src="https://kit.fontawesome.com/23198c0523.js" crossorigin="anonymous"></script>
+        <!-- <link rel="stylesheet" href="styles/debug.css"> -->
+        <style>
+            
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-<body>
-  <header>
-    <h1>RecipEase</h1>
-    <p>Your Personalized Recipe Companion</p>
-  </header>
+</style>
+	</head>
+	<body>
 
-  <section id="search">
-    <h2>Discover Delicious Recipes</h2>
-    <div>
-      <input type="text" id="recipeSearch" placeholder="Search for Recipes">
-      <button id="searchButton">Search</button>
+		<!-- .hero -->
+		<section class="hero has-background-black">
+			<div class="hero-body">
+				<div class="container">
+					<figure class="image center">
+                        <h1 class="title is-size-1"><b><font color="white">RecipEase</font></h1>
+                            <p><font color="white">  ~Your Personalized Recipe Companion~</font></p>
+					</figure>
+				</div>
+			</div>
+		</section>
 
+        <section class="hero has-background-black">
+			<div class="hero-body">
+				<div class="container">
+					<figure class="image center">
+						<img src="assets/images/Recipe.jpg" style="max-width: 256px;">
+					</figure>
+				</div>
+			</div>
+		</section>
+		<!-- /.hero -->
 
-      
-    </div>
-  </section>
+    <!-- Drink Search Container -->
+		<section class="section has-background-light">
+			<div class="container">
+				<div class="columns">
+					<div class="column">
+						<article class="meadia notification is-info">
+                            <figure class="media-center">
+								<span class="icon is-small">
+                                    <i class="fa-solid fa-martini-glass-citrus"></i>
+                                </span>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                            <h1 class="title is-size-5">Search Cocktail Recipes</h1>
+							<p class="is-size-7">
+								<form id="drinkForm" onsubmit="searchDrinksAPI(event)">
+									<input type="text" id="drinkSearch" placeholder="Search for Cocktails">
+									<button type="submit" id="searchButtonDrinks">RecipEase</button>
+								</form>
+							</p>
+						</div>
+					</div>
+                </artticle>
+            </div>
 
-  <section id="featuredRecipes">
-    <h2>Featured Recipes</h2>
-    
-    <div class="recipeCard">
-      <img src="http://placekitten.com/200/300" alt="Recipe 1">
-      <h3>Recipe Title 1</h3>
-      <p>Brief description of recipe.</p>
-    </div>
+			    <!-- Recipe Search Container-->
+					<div class="column">
+						<div class="input-shadow">
+							<i class="inset 0 1px 2px rgba($black, 0.1)"></i>
+						<article class="meadia notification is-info">
+                            <figure class="media-left">
+								<span class="icon is-small">
+                                    <i class="fa-regular fa-compass"></i>
+                                </span>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                            <h1 class="title is-size-5">Discover Delicious Recipes</h1>
+							<p class="is-size-6">
+                                <div>
+									<form id="recipeForm" onsubmit="searchRecipes(event)">
+										<input type="text" id="recipeSearch" placeholder="Search for Recipes">
+										<button type="submit" id="searchButtonRecipes">RecipEase</button>
+									</form>
+                              
+                                    
+                                  </div>
+							</p>
+						</div>
+					</div>
+                </artticle>
+			</div>
+            </div>
+			<section class="result-cards" style="display:none;">
+				<!-- Container for dynamically generated recipe cards -->
+				<div class="inner-result-card">
+					<div id="recipeList"></div>
+					<div id="recipeDetails"></div>
+				</div>
+		
+				<!-- Container for dynamically generated drink recipes -->
+				<div class="inner-result-card">
+					<div id="drinkList"></div>
+					<div id="drinkDetails"></div>
+				</div>
+			</section>
 
-    <div class="recipeCard">
-      <img src="http://placekitten.com/200/300" alt="Recipe 2">
-      <h3>Recipe Title 2</h3>
-      <p>Brief description of recipe.</p>
-    </div>
+		<section>
+            <div class="box has-text-centered">
+			<button onclick="openModal()">Open Recipe History</button>
+            </div>
+		</section>
 
-        <!-- Container for dynamically generated recipe cards -->
-        <div id="recipeList"></div>
-  </section>
-  
- 
-  <script src="./assets/js/script.js"></script>
-</body>
+			<!-- Modal -->
+			<div id="recipeModal" class="modal">
+				<div class="modal-content">
+					<span class="close" onclick="closeModal()">&times;</span>
+					<h2>Recipe History</h2>
+					<ul id="recipeHistoryList"></ul>
+				</div>
+			</div>
+		
+			<!-- Script tag to external JavaScript file -->
+			<script src="./assets/script.js"></script>
+	</body>
 </html>

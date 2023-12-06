@@ -82,7 +82,7 @@ drinkForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
     // Move the drinkInput inside the submit event to get the latest value
-    const drinkInput = document.querySelector('#drinkSearchInput').value;
+    const drinkInput = document.querySelector('#drinkSearch').value;
 
     console.log(drinkInput);
     searchDrinksAPI(drinkInput);
